@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment {
 class RequestSearchResults extends AsyncTask<String, Integer, String>
 {
 	private static final String JSON_RESULTS = "results";
-	ArrayList<String> recipes = new ArrayList<String>();
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 	Context context;
 	View view;
 	ListView list;
@@ -116,8 +116,7 @@ class RequestSearchResults extends AsyncTask<String, Integer, String>
 				for (int i = 0; i < results.length(); i++) {
 					JSONObject jo = results.getJSONObject(i);
 					Recipe r = new Recipe(jo);
-					recipes.add(r.getName());
-					
+					recipes.add(r);
 				}
 		        
 		        input.close();
@@ -141,7 +140,7 @@ class RequestSearchResults extends AsyncTask<String, Integer, String>
 		super.onPostExecute(result);
 		
 		//update the ListView with the search results
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, recipes);
+		SearchAdapter adapter = new SearchAdapter(context, recipes);
 		list = (ListView) view.findViewById(R.id.listViewSearch);
 		list.setAdapter(adapter);
 	}
