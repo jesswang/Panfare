@@ -6,6 +6,11 @@ import java.text.ParseException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Ingredient objects are stored in InventoryFragment
+ * @author lemonzest73
+ *
+ */
 public class Ingredient implements Serializable {
 	private static final String JSON_NAME = "name";
 	

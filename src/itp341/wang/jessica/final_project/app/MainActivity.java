@@ -62,9 +62,12 @@ public class MainActivity extends Activity {
 					fragment = new InventoryFragment();
 					break;
 				case 1:
+					fragment = new SearchFragment();
 					break;
 				case 2:
 					break;
+				default:
+						break;
 				}
 				
 				//display the Fragment corresponding to the selected DrawerList item

@@ -17,6 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Fragment class for inventory_fragment.xml
+ * @author lemonzest73
+ *
+ */
 public class InventoryFragment extends Fragment implements OnClickListener {
 	EditText editIngredient;
 	Button btnAdd;
