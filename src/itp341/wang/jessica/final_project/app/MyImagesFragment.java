@@ -143,12 +143,16 @@ public class MyImagesFragment extends Fragment {
     	File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 IMAGE_DIRECTORY_NAME);
 
-    	File[] files = f.listFiles();
+    	if(f.isDirectory()) {
+    		File[] files = f.listFiles();
 
-    	for(int i = 0; i < files.length; i++)
-    	{
-    		File file = files[i];
-    		fileList.add(file.getPath());
+        	if(files.length > 0) {
+        		for(int i = 0; i < files.length; i++)
+            	{
+            		File file = files[i];
+            		fileList.add(file.getPath());
+            	}
+        	}
     	}
     	return fileList;
     }
