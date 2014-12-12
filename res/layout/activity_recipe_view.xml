@@ -42,12 +42,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/labelIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_recipe_ingredients"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/recipeIngredients"
@@ -56,12 +57,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/labelDirections"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recipeDirections"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/recipeDirections"

@@ -39,12 +39,13 @@ import android.widget.ListView;
 
 /**
  * Fragment class for search_fragment.xml
- * @author lemonzest73
+ * @author Jessica Wang
  *
  */
 public class SearchFragment extends Fragment {
 	private static final String requestUrl = "http://api.pearson.com:80/kitchen-manager/v1/recipes?";
-	private static final String requestParam = "ingredients-any=";
+	private static final String requestParam = "&ingredients-any=";
+	private static final String limitParam = "limit=50";
 	ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 	
 	public SearchFragment() {
@@ -58,6 +59,7 @@ public class SearchFragment extends Fragment {
 		
 		//create String request from list of ingredients stored in JSON
 		StringBuffer str = new StringBuffer(requestUrl);
+		str.append(limitParam);
 		ArrayList<Ingredient> ingredients = IngredientDataStore.loadInventory(getActivity());
 		if(!ingredients.isEmpty()) {
 			str.append(requestParam);
@@ -87,7 +89,7 @@ public class SearchFragment extends Fragment {
 
 	/**
 	 * This class allows the app to perform HTTP requests separate from the main thread
-	 * @author lemonzest73
+	 * @author Jessica Wang
 	 *
 	 */
 	class RequestSearchResults extends AsyncTask<String, Integer, String>

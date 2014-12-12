@@ -7,8 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Ingredient objects are stored in InventoryFragment
- * @author lemonzest73
+ * Ingredient objects are stored in InventoryFragment and RecipeViewActivity
+ * @author Jessica Wang
  *
  */
 public class Ingredient implements Serializable {

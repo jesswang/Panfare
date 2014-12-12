@@ -10,10 +10,9 @@
     <string name="label_inventory">Current Inventory</string>
 
     <string-array name="navigation_drawer_items_array">
-        <item>Inventory</item>
+        <item>My Inventory</item>
         <item>Search Recipes</item>
-        <item>Favorites</item>
-        <item>Images</item>
+        <item>My Images</item>
     </string-array>
 
     <string name="title_activity_recipe_view">RecipeViewActivity</string>

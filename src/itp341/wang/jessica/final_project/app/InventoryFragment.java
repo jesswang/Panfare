@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 /**
  * Fragment class for inventory_fragment.xml
- * @author lemonzest73
+ * @author Jessica Wang
  *
  */
 public class InventoryFragment extends Fragment implements OnClickListener {

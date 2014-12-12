@@ -10,8 +10,9 @@ import org.json.JSONObject;
 import android.util.Log;
 
 /**
- * Recipe objects correspond to individual search results in SearchFragment
- * @author lemonzest73
+ * Recipe objects correspond to individual search results in SearchFragment 
+ * and the data for RecipeViewActivity
+ * @author Jessica Wang
  *
  */
 public class Recipe implements Serializable {

@@ -13,6 +13,11 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * This class uses a separate thread to make a download request for an image
+ * @author Jessica Wang
+ *
+ */
 public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 	Context context;
 	View view;
@@ -46,6 +51,7 @@ public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 		super.onPostExecute(result);
 
 		img.setImageBitmap(result);
+		//set ImageView to full size of image
 		int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, result.getWidth(), context.getResources().getDisplayMetrics());
 		int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, result.getHeight(), context.getResources().getDisplayMetrics());
 		img.setMinimumWidth(width);

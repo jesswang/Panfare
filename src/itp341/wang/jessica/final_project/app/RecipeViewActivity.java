@@ -32,10 +32,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * Activity class for individual recipe view
+ * @author Jessica Wang
+ *
+ */
 public class RecipeViewActivity extends Activity {
 	public static final String RECIPE_SELECTION = "itp341.wang.jessica.final_project.app.recipe_obj";
 	Recipe recipe;
-	TextView recipeName, recipeCuisine, recipeServes, recipeIngredients, recipeDirections;
+	TextView recipeName, recipeCuisine, recipeServes, recipeIngredients, recipeDirections,
+		labelDirections, labelIngredients;
 	ImageView recipeImg;
 	
 	@Override
@@ -48,6 +54,8 @@ public class RecipeViewActivity extends Activity {
 		recipeServes = (TextView) findViewById(R.id.recipeServes);
 		recipeIngredients = (TextView) findViewById(R.id.recipeIngredients);
 		recipeDirections = (TextView) findViewById(R.id.recipeDirections);
+		labelIngredients = (TextView) findViewById(R.id.labelIngredients);
+		labelDirections = (TextView) findViewById(R.id.labelDirections);
 		recipeImg = (ImageView) findViewById(R.id.recipeImg);
 		
 		Intent i = getIntent();
@@ -56,6 +64,8 @@ public class RecipeViewActivity extends Activity {
 		if(recipe != null) {
 			recipeName.setText(recipe.getName());
 			recipeCuisine.setText(recipe.getCuisine());
+			
+			//request loading for image and recipe data in separate threads
 			new ImageDownloader(this, findViewById(R.layout.activity_recipe_view), recipeImg).execute(recipe.getImg());
 			new RequestRecipeData().execute(recipe.getUrl());
 		}
@@ -63,7 +73,7 @@ public class RecipeViewActivity extends Activity {
 	
 	/**
 	 * This class allows the app to perform HTTP requests separate from the main thread
-	 * @author lemonzest73
+	 * @author Jessica Wang
 	 *
 	 */
 	class RequestRecipeData extends AsyncTask<String, Integer, String>
@@ -179,6 +189,8 @@ public class RecipeViewActivity extends Activity {
 				strD.append("<br/>");
 			}
 			
+			labelIngredients.setVisibility(TextView.VISIBLE);
+			labelDirections.setVisibility(TextView.VISIBLE);
 			recipeServes.setText("Serves "+recipe.getServingSize());
 			recipeIngredients.setText(Html.fromHtml(str.toString()));
 			recipeDirections.setText(Html.fromHtml(strD.toString()));
