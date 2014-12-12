@@ -92,6 +92,7 @@ public class MyImagesFragment extends Fragment {
 		
 		if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
 			fileList.add(fileUri.getPath());
+			adapter.notifyDataSetChanged();
 			/*BitmapFactory.Options options = new BitmapFactory.Options();
 	        options.inSampleSize = 2;
 			Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);*/ 
