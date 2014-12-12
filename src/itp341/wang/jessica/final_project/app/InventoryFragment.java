@@ -41,7 +41,7 @@ public class InventoryFragment extends Fragment implements OnClickListener {
         TextView text= (TextView) view.findViewById(R.id.detail);
         text.setText(menu);*/
 		editIngredient = (EditText) view.findViewById(R.id.editIngredient);
-		btnAdd = (Button) view.findViewById(R.id.btnAdd);
+		btnAdd = (Button) view.findViewById(R.id.myImagesGrid);
 		list = (ListView) view.findViewById(R.id.listViewIngredients);
 		
 		btnAdd.setOnClickListener(this);

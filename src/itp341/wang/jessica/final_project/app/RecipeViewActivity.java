@@ -17,9 +17,12 @@ import org.json.JSONObject;
 
 import itp341.wang.jessica.final_project.model.Ingredient;
 import itp341.wang.jessica.final_project.model.Recipe;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -48,6 +51,9 @@ public class RecipeViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recipe_view);
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#99cfe3")));
 		
 		recipeName = (TextView) findViewById(R.id.recipeName);
 		recipeCuisine = (TextView) findViewById(R.id.recipeCuisine);

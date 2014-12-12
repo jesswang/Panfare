@@ -22,5 +22,7 @@
     <string name="label_recipe_ingredients">Ingredients</string>
 
     <string name="recipeDirections">Directions</string>
+    <string name="drawer_open_content_desc">Open drawer</string>
+    <string name="drawer_close_content_desc">Close drawer</string>
 
 </resources>
