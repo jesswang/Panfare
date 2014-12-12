@@ -56,7 +56,7 @@ public class InventoryFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		String ingred = editIngredient.getText().toString();
+		String ingred = editIngredient.getText().toString().trim().replaceAll("[^a-zA-Z0-9 -]", "").replaceAll("\\s+","");
 		//if value is valid
 		if(!ingred.equals("")) {
 			ingredients.add(new Ingredient(ingred));

@@ -69,6 +69,8 @@ public class SearchFragment extends Fragment {
 			}
 			Log.d("Request string", str.toString());
 		}
+		
+		getActivity().setProgressBarIndeterminateVisibility(true);
 		new RequestSearchResults(getActivity(), view).execute(str.toString());
 		
 		ListView list = (ListView) view.findViewById(R.id.listViewSearch);
@@ -77,6 +79,7 @@ public class SearchFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
+				// launch new intent for the selected recipe
 				Intent i = new Intent(getActivity(), RecipeViewActivity.class);
 				i.putExtra(RecipeViewActivity.RECIPE_SELECTION, recipes.get(position));
 				getActivity().startActivity(i);
@@ -155,6 +158,7 @@ public class SearchFragment extends Fragment {
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			
+			getActivity().setProgressBarIndeterminateVisibility(false);
 			//update the ListView with the search results
 			SearchAdapter adapter = new SearchAdapter(context, recipes);
 			list = (ListView) view.findViewById(R.id.listViewSearch);

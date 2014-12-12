@@ -31,6 +31,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,6 +51,9 @@ public class RecipeViewActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setProgressBarIndeterminateVisibility(true);
+		
 		setContentView(R.layout.activity_recipe_view);
 		
 		ActionBar actionBar = getActionBar();
@@ -71,6 +75,7 @@ public class RecipeViewActivity extends Activity {
 			recipeName.setText(recipe.getName());
 			recipeCuisine.setText(recipe.getCuisine());
 			
+			setProgressBarIndeterminateVisibility(true);
 			//request loading for image and recipe data in separate threads
 			new ImageDownloader(this, findViewById(R.layout.activity_recipe_view), recipeImg).execute(recipe.getImg());
 			new RequestRecipeData().execute(recipe.getUrl());
@@ -195,6 +200,7 @@ public class RecipeViewActivity extends Activity {
 				strD.append("<br/>");
 			}
 			
+			setProgressBarIndeterminateVisibility(false);
 			labelIngredients.setVisibility(TextView.VISIBLE);
 			labelDirections.setVisibility(TextView.VISIBLE);
 			recipeServes.setText("Serves "+recipe.getServingSize());
