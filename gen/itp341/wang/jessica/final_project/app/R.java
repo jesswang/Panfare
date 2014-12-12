@@ -18,36 +18,38 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int drawer_layout=0x7f080000;
-        public static final int drawer_list=0x7f080002;
-        public static final int editIngredient=0x7f08000e;
-        public static final int frame_container=0x7f080001;
-        public static final int labelDirections=0x7f08000a;
-        public static final int labelIngredients=0x7f080008;
-        public static final int listIngredientDelete=0x7f08000d;
-        public static final int listRowIngredient=0x7f08000c;
-        public static final int listViewIngredients=0x7f080010;
-        public static final int listViewSearch=0x7f080011;
-        public static final int menu_item_take_photo=0x7f080014;
-        public static final int myImagesGrid=0x7f08000f;
-        public static final int recipeCuisine=0x7f080005;
-        public static final int recipeDirections=0x7f08000b;
-        public static final int recipeImg=0x7f080006;
-        public static final int recipeIngredients=0x7f080009;
-        public static final int recipeName=0x7f080004;
-        public static final int recipeServes=0x7f080007;
-        public static final int rowRecipeCuisine=0x7f080013;
-        public static final int rowRecipeName=0x7f080012;
-        public static final int scrollView1=0x7f080003;
+        public static final int detailedImage=0x7f080000;
+        public static final int drawer_layout=0x7f080001;
+        public static final int drawer_list=0x7f080003;
+        public static final int editIngredient=0x7f08000f;
+        public static final int frame_container=0x7f080002;
+        public static final int labelDirections=0x7f08000b;
+        public static final int labelIngredients=0x7f080009;
+        public static final int listIngredientDelete=0x7f08000e;
+        public static final int listRowIngredient=0x7f08000d;
+        public static final int listViewIngredients=0x7f080011;
+        public static final int listViewSearch=0x7f080012;
+        public static final int menu_item_take_photo=0x7f080015;
+        public static final int myImagesGrid=0x7f080010;
+        public static final int recipeCuisine=0x7f080006;
+        public static final int recipeDirections=0x7f08000c;
+        public static final int recipeImg=0x7f080007;
+        public static final int recipeIngredients=0x7f08000a;
+        public static final int recipeName=0x7f080005;
+        public static final int recipeServes=0x7f080008;
+        public static final int rowRecipeCuisine=0x7f080014;
+        public static final int rowRecipeName=0x7f080013;
+        public static final int scrollView1=0x7f080004;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_recipe_view=0x7f030001;
-        public static final int ingredient_list_row=0x7f030002;
-        public static final int inventory_fragment=0x7f030003;
-        public static final int my_images_fragment=0x7f030004;
-        public static final int search_fragment=0x7f030005;
-        public static final int search_list_row=0x7f030006;
+        public static final int activity_image_view=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_recipe_view=0x7f030002;
+        public static final int ingredient_list_row=0x7f030003;
+        public static final int inventory_fragment=0x7f030004;
+        public static final int my_images_fragment=0x7f030005;
+        public static final int search_fragment=0x7f030006;
+        public static final int search_list_row=0x7f030007;
     }
     public static final class menu {
         public static final int my_images_action_bar=0x7f070000;
@@ -65,6 +67,7 @@ public final class R {
         public static final int label_recipe_ingredients=0x7f040009;
         public static final int msg_bad_input=0x7f040005;
         public static final int recipeDirections=0x7f04000a;
+        public static final int title_activity_image_view=0x7f04000d;
         public static final int title_activity_recipe_view=0x7f040007;
     }
     public static final class style {

@@ -3,6 +3,7 @@ package itp341.wang.jessica.final_project.app;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,9 +17,9 @@ import android.widget.ImageView;
 
 public class MyImagesAdapter extends BaseAdapter {
 	Context context;
-	String[] fileList;
+	ArrayList<String> fileList = new ArrayList<String>();
 	
-	MyImagesAdapter(Context context, String[] fileList) {
+	MyImagesAdapter(Context context, ArrayList<String> fileList) {
 		this.context = context;
 		this.fileList = fileList;
 	}
@@ -26,13 +27,13 @@ public class MyImagesAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return fileList.length;
+		return fileList.size();
 	}
 
 	@Override
 	public Object getItem(int pos) {
 		// TODO Auto-generated method stub
-		return fileList[pos];
+		return fileList.get(pos);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class MyImagesAdapter extends BaseAdapter {
         }
 		BitmapFactory.Options o = new BitmapFactory.Options();
         o.inJustDecodeBounds = true;
-        File file = new File(fileList[pos]);
+        File file = new File(fileList.get(pos));
         try {
 			BitmapFactory.decodeStream(new FileInputStream(file), null, o);
 		} catch (FileNotFoundException e1) {
@@ -62,6 +63,7 @@ public class MyImagesAdapter extends BaseAdapter {
 			e1.printStackTrace();
 		}
 
+        // scaling code referenced from StackOverflow
         final int REQUIRED_SIZE = 80;
 
         int scale = 1;

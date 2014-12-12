@@ -16,13 +16,11 @@
     </string-array>
 
     <string name="title_activity_recipe_view">RecipeViewActivity</string>
-
     <string name="label_cost">Approximate cost:</string>
-
     <string name="label_recipe_ingredients">Ingredients</string>
-
     <string name="recipeDirections">Directions</string>
     <string name="drawer_open_content_desc">Open drawer</string>
     <string name="drawer_close_content_desc">Close drawer</string>
+    <string name="title_activity_image_view">ImageViewActivity</string>
 
 </resources>

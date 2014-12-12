@@ -25,6 +25,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -38,15 +40,27 @@ public class MyImagesFragment extends Fragment {
 	Bitmap photo;
 	MyImagesAdapter adapter;
 	GridView myImagesGrid;
+	ArrayList<String> fileList = new ArrayList<String>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		fileList = getFilesFromStorage();
 		View view = inflater.inflate(R.layout.my_images_fragment, container, false);
 		myImagesGrid = (GridView) view.findViewById(R.id.myImagesGrid);
-		adapter = new MyImagesAdapter(getActivity().getApplicationContext(), getFilesFromStorage());
+		adapter = new MyImagesAdapter(getActivity().getApplicationContext(), fileList);
 		myImagesGrid.setAdapter(adapter);
-		
+		myImagesGrid.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int pos,
+					long id) {
+				Intent i = new Intent(getActivity().getApplicationContext(), ImageViewActivity.class);
+				i.putExtra(ImageViewActivity.EXTRA_FILE_PATH, fileList.get(pos));
+				startActivityForResult(i, 0);
+			}
+			
+		});
 		setHasOptionsMenu(true);
 		return view;
 	}
@@ -77,13 +91,14 @@ public class MyImagesFragment extends Fragment {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+			fileList.add(fileUri.getPath());
 			/*BitmapFactory.Options options = new BitmapFactory.Options();
 	        options.inSampleSize = 2;
 			Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);*/ 
 		}
 	}
 	
-	/*@Override
+	@Override
 	public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
  
@@ -97,7 +112,7 @@ public class MyImagesFragment extends Fragment {
 		if(savedInstanceState != null) {
 			fileUri = savedInstanceState.getParcelable("file_uri");
 		}
-	}*/
+	}
     
     private File getOutputMediaFile() {
     	 
@@ -122,18 +137,17 @@ public class MyImagesFragment extends Fragment {
         return mediaFile;
     }
     
-    private String[] getFilesFromStorage() {
+    private ArrayList<String> getFilesFromStorage() {
     	// Retrieve files from directory
     	File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 IMAGE_DIRECTORY_NAME);
 
     	File[] files = f.listFiles();
-    	String[] fileList = new String[files.length];
 
     	for(int i = 0; i < files.length; i++)
     	{
     		File file = files[i];
-    		fileList[i] = file.getPath();
+    		fileList.add(file.getPath());
     	}
     	return fileList;
     }
