@@ -15,6 +15,9 @@ public class Ingredient implements Serializable {
 	private static final String JSON_NAME = "name";
 	
 	private String name;
+	private String quantity;
+	private String unit;
+	private String preparation;
 
 	public Ingredient() {
 		super();
@@ -23,6 +26,13 @@ public class Ingredient implements Serializable {
 	public Ingredient(String name) {
 		super();
 		this.name = name;
+	}
+	
+	public Ingredient(String name, String quantity, String unit, String preparation) {
+		super();
+		this.name = name;
+		this.quantity = quantity;
+		this.unit = unit;
 	}
 	
 	/**
@@ -52,9 +62,33 @@ public class Ingredient implements Serializable {
 		this.name = name;
 	}
 
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 	@Override
 	public String toString() {
 		return "Ingredient [name=" + name + "]";
+	}
+
+	public String getPreparation() {
+		return preparation;
+	}
+
+	public void setPreparation(String preparation) {
+		this.preparation = preparation;
 	}
 
 }

@@ -5,6 +5,7 @@ import itp341.wang.jessica.final_project.model.Recipe;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 public class SearchAdapter extends BaseAdapter {
 	private static ArrayList<Recipe> recipes;
 	private LayoutInflater inf;
+	//ImageView img;
 	
 	public SearchAdapter(Context context, ArrayList<Recipe> recipes) {
 		this.recipes = recipes;
@@ -60,43 +62,10 @@ public class SearchAdapter extends BaseAdapter {
 		name.setText(recipe.getName());
 		cuisine.setText(recipe.getCuisine());
 		
-		new ImageDownloader(view).execute(recipe.getThumbnail());
+		//img = (ImageView) view.findViewById(R.id.rowRecipeImg);
+		//new ImageDownloader(view.getContext(), view, img).execute(recipe.getThumbnail());
 		
 		return view;
-	}
-
-}
-
-
-class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
-	View view;
-	ImageView img;
-
-	public ImageDownloader(View view) {
-		this.view = view;
-	}
-
-	@Override
-	protected Bitmap doInBackground(String... urls) {
-		Bitmap icon = null;
-		try {
-			InputStream in = new java.net.URL(urls[0]).openStream();
-			icon = BitmapFactory.decodeStream(in);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return icon;
-	}
-
-	@Override
-	protected void onPostExecute(Bitmap result) {
-		super.onPostExecute(result);
-		img = (ImageView) view.findViewById(R.id.rowRecipeImg);
-		img.setImageBitmap(result);
 	}
 
 }

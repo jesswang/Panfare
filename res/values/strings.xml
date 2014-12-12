@@ -8,12 +8,20 @@
     <string name="add_ingredient">Add</string>
     <string name="msg_bad_input">Please enter a valid value</string>
     <string name="label_inventory">Current Inventory</string>
-    
+
     <string-array name="navigation_drawer_items_array">
-	    <item>Inventory</item>
-	    <item>Search Recipes</item>
-	    <item>Favorites</item>
-	    <item>Images</item>
+        <item>Inventory</item>
+        <item>Search Recipes</item>
+        <item>Favorites</item>
+        <item>Images</item>
     </string-array>
+
+    <string name="title_activity_recipe_view">RecipeViewActivity</string>
+
+    <string name="label_cost">Approximate cost:</string>
+
+    <string name="label_recipe_ingredients">Ingredients</string>
+
+    <string name="recipeDirections">Directions</string>
 
 </resources>

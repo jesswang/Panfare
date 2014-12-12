@@ -1,5 +1,8 @@
 package itp341.wang.jessica.final_project.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +14,7 @@ import android.util.Log;
  * @author lemonzest73
  *
  */
-public class Recipe {
+public class Recipe implements Serializable {
 	private static final String JSON_NAME = "name";
 	private static final String JSON_ID = "id";
 	private static final String JSON_URL = "url";
@@ -21,16 +24,16 @@ public class Recipe {
 	private static final String JSON_IMG = "image";
 	private static final String JSON_THUMBNAIL = "thumb";
 	
-	String name, id, url, cuisine, cookingMethod, img, thumbnail;
-	String[] ingredients;
+	String name, id, url, cuisine, cookingMethod, img, thumbnail, servingSize;
+	String[] directions;
+	ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 	
 	public Recipe() {
 		super();
 	}
 
 	public Recipe(String name, String id, String url, String cuisine,
-			String cookingMethod, String img, String thumbnail,
-			String[] ingredients) {
+			String cookingMethod, String img, String thumbnail) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -39,7 +42,6 @@ public class Recipe {
 		this.cookingMethod = cookingMethod;
 		this.img = img;
 		this.thumbnail = thumbnail;
-		this.ingredients = ingredients;
 	}
 	
 	/**
@@ -56,10 +58,6 @@ public class Recipe {
 		thumbnail = json.getString(JSON_THUMBNAIL);
 		
 		JSONArray array = json.getJSONArray(JSON_INGREDIENTS);
-		ingredients = new String[array.length()];
-		for(int i = 0; i < array.length(); i++) {
-			ingredients[i] = array.getString(i).toString();
-		}
 	}
 	
 	/**Converts Recipe data into JSON object
@@ -136,12 +134,28 @@ public class Recipe {
 		this.thumbnail = thumbnail;
 	}
 
-	public String[] getIngredients() {
+	public String getServingSize() {
+		return servingSize;
+	}
+
+	public void setServingSize(String servingSize) {
+		this.servingSize = servingSize;
+	}
+
+	public ArrayList<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(String[] ingredients) {
+	public void setIngredients(ArrayList<Ingredient> ingredients) {
 		this.ingredients = ingredients;
+	}
+
+	public String[] getDirections() {
+		return directions;
+	}
+
+	public void setDirections(String[] directions) {
+		this.directions = directions;
 	}
 	
 }

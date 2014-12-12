@@ -24,6 +24,7 @@ import org.json.JSONTokener;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -42,6 +45,7 @@ import android.widget.ListView;
 public class SearchFragment extends Fragment {
 	private static final String requestUrl = "http://api.pearson.com:80/kitchen-manager/v1/recipes?";
 	private static final String requestParam = "ingredients-any=";
+	ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 	
 	public SearchFragment() {
 		
@@ -65,84 +69,96 @@ public class SearchFragment extends Fragment {
 		}
 		new RequestSearchResults(getActivity(), view).execute(str.toString());
 		
+		ListView list = (ListView) view.findViewById(R.id.listViewSearch);
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long id) {
+				Intent i = new Intent(getActivity(), RecipeViewActivity.class);
+				i.putExtra(RecipeViewActivity.RECIPE_SELECTION, recipes.get(position));
+				getActivity().startActivity(i);
+			}
+		});
+		
 		return view;
 	}
 
-}
 
-/**
- * This class allows the app to perform HTTP requests separate from the main thread
- * @author lemonzest73
- *
- */
-class RequestSearchResults extends AsyncTask<String, Integer, String>
-{
-	private static final String JSON_RESULTS = "results";
-	ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-	Context context;
-	View view;
-	ListView list;
-	
-	public RequestSearchResults(Context context, View view) {
-		this.context = context;
-		this.view = view;
-	}
-	
-	@Override
-	protected String doInBackground(String... params) {
-		//make HTTP GET request
-		String data = "";
-		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(params[0]);
-		try {
-			HttpResponse response = client.execute(request);
-			HttpEntity httpEntity = response.getEntity();
-			InputStream input = httpEntity.getContent();
-			
-			if(input != null) {
-				BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(input));
-				StringBuilder jsonString = new StringBuilder();
-				String line = null;
-				while ((line = bufferedReader.readLine()) != null) {
-					// line breaks are omitted and irrelevant
-					jsonString.append(line);
-				}
-		 
-				// parse the JSON using JSONTokener
-				JSONObject json = new JSONObject(jsonString.toString());
-				JSONArray results = json.getJSONArray(JSON_RESULTS);
-
-				// build the array of recipes from JSONObjects
-				for (int i = 0; i < results.length(); i++) {
-					JSONObject jo = results.getJSONObject(i);
-					Recipe r = new Recipe(jo);
-					recipes.add(r);
-				}
-		        
-		        input.close();
-			}
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	/**
+	 * This class allows the app to perform HTTP requests separate from the main thread
+	 * @author lemonzest73
+	 *
+	 */
+	class RequestSearchResults extends AsyncTask<String, Integer, String>
+	{
+		private static final String JSON_RESULTS = "results";
+		Context context;
+		View view;
+		ListView list;
+		
+		public RequestSearchResults(Context context, View view) {
+			this.context = context.getApplicationContext();
+			this.view = view;
 		}
 		
-		return data;
+		@Override
+		protected String doInBackground(String... params) {
+			//make HTTP GET request
+			String data = "";
+			HttpClient client = new DefaultHttpClient();
+			HttpGet request = new HttpGet(params[0]);
+			try {
+				HttpResponse response = client.execute(request);
+				HttpEntity httpEntity = response.getEntity();
+				InputStream input = httpEntity.getContent();
+				
+				if(input != null) {
+					BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(input));
+					StringBuilder jsonString = new StringBuilder();
+					String line = null;
+					while ((line = bufferedReader.readLine()) != null) {
+						// line breaks are omitted and irrelevant
+						jsonString.append(line);
+					}
+			 
+					// parse the JSON using JSONTokener
+					JSONObject json = new JSONObject(jsonString.toString());
+					JSONArray results = json.getJSONArray(JSON_RESULTS);
+
+					// build the array of recipes from JSONObjects
+					for (int i = 0; i < results.length(); i++) {
+						JSONObject jo = results.getJSONObject(i);
+						Recipe r = new Recipe(jo);
+						recipes.add(r);
+					}
+			        
+			        input.close();
+				}
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return data;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			
+			//update the ListView with the search results
+			SearchAdapter adapter = new SearchAdapter(context, recipes);
+			list = (ListView) view.findViewById(R.id.listViewSearch);
+			list.setAdapter(adapter);
+		}
+		
 	}
 
-	@Override
-	protected void onPostExecute(String result) {
-		super.onPostExecute(result);
-		
-		//update the ListView with the search results
-		SearchAdapter adapter = new SearchAdapter(context, recipes);
-		list = (ListView) view.findViewById(R.id.listViewSearch);
-		list.setAdapter(adapter);
-	}
-	
 }
